@@ -1,71 +1,34 @@
-#Fri Jul 23 12:51:57 IST 2010
-# pygmail.py - A Python Library For Gmail
+import imaplib
 
-import imaplib, re
+username = "jthebutler"
+password = "jeevesisguessable"
 
-class pygmail(object):
-	def __init__(self):
-		self.IMAP_SERVER='imap.gmail.com'
-		self.IMAP_PORT=993
-		self.M = None
-		self.response = None
-		self.mailboxes = []
+imap_server = imaplib.IMAP4_SSL("imap.gmail.com",993)
+imap_server.login(username, password)
 
-	def login(self, username, password):
-		self.M = imaplib.IMAP4_SSL(self.IMAP_SERVER, self.IMAP_PORT)
-		rc, self.response = self.M.login(username, password)
-		return rc
+imap_server.select('INBOX')
 
-	def get_mailboxes(self):
-		rc, self.response = self.M.list()
-		for item in self.response:
-			self.mailboxes.append(item.split()[-1])
-		return rc
+# Count the unread emails
+status, response = imap_server.status('INBOX', "(UNSEEN)")
+unreadcount = int(response[0].split()[2].strip(').,]'))
 
-	def get_mail_count(self, folder='Inbox'):
-		rc, self.response = self.M.select(folder)
-		return self.response[0]
+#If there aren't any new emails, get the fuck out of there
+if unreadcount == 0:
+	print "No new mail! Quitting."
+	quit()
+else:
+	print ("%s new message from:" % unreadcount) 	
 
-	def get_unread_count(self, folder='Inbox'):
-		rc, self.response = self.M.status(folder, "(UNSEEN)")
-		unreadCount = re.search("UNSEEN (\d+)", self.response[0]).group(1)
-		return unreadCount
+# Search for all new mail
+status, unread_email_ids = imap_server.search(None, '(UNSEEN)')
 
-	def get_imap_quota(self):
-		quotaStr = self.M.getquotaroot("Inbox")[1][1][0]
-		r = re.compile('\d+').findall(quotaStr)
-		if r == []:
-			r.append(0)
-			r.append(0)
-		return float(r[1])/1024, float(r[0])/1024
+def get_from(email_ids):
+    fromlist = []
+    for e_id in email_ids:
+        _, response = imap_server.fetch(e_id, '(body[header.fields (from)])')
+        fromlist.append(response[0][1][6:])
+    return fromlist   
 
-	def get_mails_from(self, uid, folder='Inbox'):
-		status, count = self.M.select(folder, readonly=1)
-		status, response = self.M.search(None, 'FROM', uid)
-		email_ids = [e_id for e_id in response[0].split()]
-		return email_ids
-
-	def get_mail_from_id(self, id):
-		status, response = self.M.fetch(id, '(body[header.fields (subject)])')
-		return response
-
-	def rename_mailbox(self, oldmailbox, newmailbox):
-		rc, self.response = self.M.rename(oldmailbox, newmailbox)
-		return rc
-
-	def create_mailbox(self, mailbox):
-		rc, self.response = self.M.create(mailbox)
-		return rc
-
-	def delete_mailbox(self, mailbox):
-		rc, self.response = self.M.delete(mailbox)
-		return rc
-
-	def logout(self):
-		self.M.logout()
-
-
-g = pygmail()
-g.login('jthebutler@gmail.com', 'jeevesisguessable')
-print g.get_mail_count('INBOX')
-print g.get_unread_count('INBOX')
+if len(unread_email_ids) != 0:
+	for email in get_from(unread_email_ids):
+		print email
