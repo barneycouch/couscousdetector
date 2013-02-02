@@ -1,5 +1,9 @@
 Complete email address parsing (separate by < and >)
 
+Stop storing passwords in plaintext
+
+Put this on the rPi
+
 Find a way to add hated food to parser
 
 Get some users!
