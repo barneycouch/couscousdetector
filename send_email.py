@@ -1,23 +1,3 @@
-# import smtplib  
-  
-# fromaddr = 'jthebutler@gmail.com'  
-# toaddrs  = 'bc389@cam.ac.uk'  
-# subject = 'Oh shit'
-# msg = 'There was a terrible error that occured and I wanted you to know!'  
-  
-  
-# # Credentials (if needed)  
-# username = 'jthebutler'  
-# password = 'jeevesisguessable'  
-  
-# # The actual mail send  
-# server = smtplib.SMTP('smtp.gmail.com:587')  
-# server.starttls()  
-# server.login(username,password)  
-# server.sendmail(fromaddr, toaddrs, msg)  
-# server.quit() 
-
-#!/usr/bin/python
 import smtplib
  
 SMTP_SERVER = 'smtp.gmail.com'
@@ -26,8 +6,8 @@ SMTP_PORT = 587
 sender = 'jthebutler@gmail.com'
 password = 'jeevesisguessable'
 recipient = 'bc389@cam.ac.uk'
-subject = 'Gmail SMTP Test'
-body = 'blah blah blah'
+subject = 'The CousCous Roundup'
+body = 'There is couscous coming on Saturday. Shit the bed.'
  
 "Sends an e-mail to the specified recipient."
  
