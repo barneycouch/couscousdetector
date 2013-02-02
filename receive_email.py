@@ -1,3 +1,5 @@
+# cheers http://bitsofpy.blogspot.co.uk/2010/05/python-and-gmail-with-imap.html
+
 import imaplib
 
 username = "jthebutler"

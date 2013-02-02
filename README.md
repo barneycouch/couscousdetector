@@ -1,4 +1,4 @@
-#Jeeves, the inframous Couscous detector.
+#Jeeves, the infamous Couscous detector.
 
 ##Introduction
 Nobody likes couscous, so we built this to email us when it's tragically on the menu. By popular demand it'll tell you when other horrible dishes are available.
