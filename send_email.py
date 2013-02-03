@@ -1,10 +1,15 @@
-import smtplib
+import smtplib, sys
  
 SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587
- 
-sender = 'jthebutler@gmail.com'
-password = 'jeevesisguessable'
+
+try:
+	sender = str(sys.argv[1])
+	password = str(sys.argv[2])
+except:
+	print("Please provide <sender email> <password> arguments!")
+	quit()
+
 recipient = 'bc389@cam.ac.uk'
 subject = 'The CousCous Roundup'
 body = 'There is couscous coming on Saturday. Shit the bed.'

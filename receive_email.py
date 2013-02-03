@@ -1,13 +1,21 @@
 # cheers http://bitsofpy.blogspot.co.uk/2010/05/python-and-gmail-with-imap.html
 
-import imaplib
+import imaplib, sys
 import re
 
-username = "jthebutler"
-password = "jeevesisguessable"
-
+#try to log on with arguments given
+try:
+    username = str(sys.argv[1])
+    password = str(sys.argv[2])
+except:
+    print("Please provide <gmail username> <password> arguments!")
+    quit()
 imap_server = imaplib.IMAP4_SSL("imap.gmail.com",993)
-imap_server.login(username, password)
+try:
+    imap_server.login(username, password)
+except:
+    print("Incorrect login details!")
+    quit()
 
 imap_server.select('INBOX')
 
