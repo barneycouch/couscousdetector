@@ -1,4 +1,6 @@
-Complete email address parsing (separate by < and >)
+Complete email address parsing (separate by < and >) DONE
+
+Check hatedfood search - soup should pop every day but only pops first day
 
 Stop storing passwords in plaintext
 

@@ -1,6 +1,7 @@
 # cheers http://bitsofpy.blogspot.co.uk/2010/05/python-and-gmail-with-imap.html
 
 import imaplib
+import re
 
 username = "jthebutler"
 password = "jeevesisguessable"
@@ -28,7 +29,10 @@ def get_from(email_ids):
     fromlist = []
     for e_id in email_ids:
         _, response = imap_server.fetch(e_id, '(body[header.fields (from)])')
-        fromlist.append(response[0][1][6:])
+        fromHeader = (response[0][1][6:])
+        matchObj = re.findall('<.*@', fromHeader, re.S)        
+        sender = matchObj[0].strip('[@<')
+        fromlist.append(sender)
     return fromlist   
 
 if len(unread_email_ids) != 0:
