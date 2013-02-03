@@ -33,10 +33,10 @@ print "Good morning sir, shall we have a check for couscous?\n\n";
 #sleep(2);
 
 
-system("couscous_mk2.py");
+system("couscous.py");
 
 
-my $couscousValue = `couscous_mk2.py`;
+my $couscousValue = `couscous.py`;
 
 $mech->get('https://webmail.hermes.cam.ac.uk/login/nb455') or die "Hermes GET failed";
 $mech -> form_number(2) or die "form name error";
