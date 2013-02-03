@@ -1,4 +1,3 @@
-#A sweary couscous detector in 8 lines of Python.
 import urllib, re, sys
 from bs4 import BeautifulSoup
 
@@ -21,15 +20,3 @@ for i in find_menu(hallsoup):
 			print("""All is clear on %s.\n""") % i.find_all('h2')[0].find_all('a')[0].string
 	except:
 		print("")
-
-
-
-##Maybe I can do it functionally? Fuck that, it's 3:55am.
-
-
-# def find_couscous(menu_html):
-# 	if 'Cous' in str(menu_html):
-# 		return menu_html.find_all('h2')[0].find_all('a')[0].string
-
-
-# print map(find_couscous, find_menu(hallsoup))
