@@ -14,7 +14,7 @@ def find_menu(soup):
 
 for i in find_menu(hallsoup):
 	try:
-		if hatedfood in str(i):
+		if hatedfood.title() in str(i): #.title() capitalises first letter, as used by the menu system
 			print("""The fucking %s is coming on %s, so don't book fucking hall then.\n""") % (hatedfood, i.find_all('h2')[0].find_all('a')[0].string)
 		else:
 			print("""All is clear on %s.\n""") % i.find_all('h2')[0].find_all('a')[0].string
