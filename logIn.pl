@@ -69,19 +69,6 @@ $mech -> form_number(1) or die "form name error";
 
 
 
-#
- #foreach ($recipients) {
- #	if (($recipients[scalar @recipients]) = $_) {
- #	$recipientList = ($recipientList.$_."\@cam.ac.uk");}
- #	else {
- #		$recipientList = ($recipientList.$_."\@cam.ac.uk ,");
- #	}
-# } 
-# my $recipientList = join(',', $recipients[0..$#recipients]);
-
-# my $recipientList = join(' ,',@recipients);
-# print "\n".$recipientList;
-# $mech -> field("hdr_To",$recipientList);
 
 $mech -> field("hdr_To",$recipients);
 print $recipients;
