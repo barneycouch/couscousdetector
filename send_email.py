@@ -13,16 +13,8 @@ except:
 
 subject = 'The CousCous Roundup'
 body = 'There is couscous coming on Saturday. Shit the bed.'
- 
- 
+
 body = "" + body + ""
- 
-# headers = ["From: " + sender,
-#            "Subject: " + subject,
-#            "To: " + recipient,
-#            "MIME-Version: 1.0",
-#            "Content-Type: text/html"]
-# headers = "\r\n".join(headers)
  
 recipients = []
 
