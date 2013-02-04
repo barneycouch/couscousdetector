@@ -15,7 +15,7 @@ my $passR = "$ARGV[3]";
  
 
 
-my $file = "users.txt";
+my $file = "crs_ids.txt";
 open (FH, "< $file") or die "Can't open $file for read: $!";
 my @lines;
 while (<FH>) {
