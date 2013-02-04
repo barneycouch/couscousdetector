@@ -6,11 +6,12 @@ SMTP_PORT = 587
 try:
 	sender = str(sys.argv[1])
 	password = str(sys.argv[2])
+	recipient = str(sys.argv[3])
 except:
 	print("Please provide <sender email> <password> arguments!")
 	quit()
 
-recipient = 'bc389@cam.ac.uk'
+
 subject = 'The CousCous Roundup'
 body = 'There is couscous coming on Saturday. Shit the bed.'
  

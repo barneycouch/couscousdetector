@@ -10,3 +10,5 @@ Nobody likes couscous, so we built this to email us when it's tragically on the 
 `receive_email.py` and `send_email.py` check our inbox for new subscribers and provide and alternate (not currently used) way to send out the email alerts, respectively.
 
 `users.txt` holds those unlucky enough to be subscribed to our emails of doom.
+
+`Main.pl 'CRSID (for logging into mealbooking)' 'Jeeves' email' 'Jeeves' password' 'associated raven password for CRSID' sends a standard email (content pending) to all users in the text file

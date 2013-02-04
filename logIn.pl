@@ -16,9 +16,11 @@ my $myCookies = $mech->cookie_jar(HTTP::Cookies->new);
 $mech->get('https://raven.cam.ac.uk/auth/login.html');
 $mech->success or die "login GET fail";
 my $user = "$ARGV[0]";
-my $passR = "$ARGV[1]";
-my $passH = "$ARGV[2]"; 
-my $recipients ="$ARGV[3]";
+my $emailJ = "$ARGV[1]";
+my $passJ = "$ARGV[2]";
+my $passR = "$ARGV[3]"; 
+my $recipient ="$ARGV[4]";
+
 $mech -> form_name("credentials") or die "form name error";
 $mech -> field("pwd" , $passR);# or die "password error";
 $mech -> field("userid", $user);# or die "user id error";
@@ -33,47 +35,11 @@ print "Good morning sir, shall we have a check for couscous?\n\n";
 #sleep(2);
 
 
-system("couscous.py");
+print(`couscous.py "couscous"`);
 
 
-my $couscousValue = `couscous.py`;
+my $couscousValue = `couscous.py "couscous"`;
 
-$mech->get('https://webmail.hermes.cam.ac.uk/login/nb455') or die "Hermes GET failed";
-$mech -> form_number(2) or die "form name error";
-$mech -> field("password" , $passH);# or die "password error";
-$mech -> field("userid", $user);# or die "user id error";
-$mech -> click ("login") or die "click error" ;
-
-my $sessionUri = $mech -> uri;
-my @values = split('/', $sessionUri);
-
-#foreach my $val (@values) {
-#    print "$val\n";
-#  }
-my @values2 = split(':',$values[4]);
-#foreach my $val2 (@values2) {
-#    print "$val2\n";
-#  }
-
-my $sessionCode = $values2[1];
-
-#print $mech -> uri;
-
-$mech->get('https://webmail.hermes.cam.ac.uk/session/'.$user.':'.$sessionCode.'//AAAc@compose?postponed_fresh=Compose+a+fresh+message') or die "Hermes GET failed";
-
-print "\n\nLet me send the morning mail for you sir, don't you worry about such trifles.";
-
-print $mech -> uri;
-
-$mech -> form_number(1) or die "form name error";
+`send_email.py $emailJ $passJ $recipient`
 
 
-
-
-$mech -> field("hdr_To",$recipients);
-print $recipients;
-
-$mech -> field("hdr_Subject","Good morning, sir");
-$mech -> field("body","You'll be pleased to know I have had our minions check the fine dining menus for us - here is what they have reported\n\n           -\n".$couscousValue."
-	                       -Jeeves");
-$mech -> click ("sub_send") or die "click error" ;

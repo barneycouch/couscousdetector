@@ -44,5 +44,8 @@ def get_from(email_ids):
     return fromlist   
 
 if len(unread_email_ids) != 0:
-	for email in get_from(unread_email_ids):
-		print email
+	for email in get_from(unread_email_ids):		
+            with open("users.txt", "a") as f:
+                f.write("\n"+email)
+                print (email+" added successfully")
+
