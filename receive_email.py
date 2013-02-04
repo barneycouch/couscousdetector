@@ -28,7 +28,7 @@ if unreadcount == 0:
 	print "No new mail! Quitting."
 	quit()
 else:
-	print ("%s new message from:" % unreadcount) 	
+	print ("%s new message." % unreadcount) 	
 
 # Search for all new mail
 status, unread_email_ids = imap_server.search(None, '(UNSEEN)')
@@ -43,9 +43,17 @@ def get_from(email_ids):
         fromlist.append(sender)
     return fromlist   
 
+recipients = []
+f = open("crs_ids.txt", "r")
+for line in f:
+    recipients.append(line.rstrip())
+f.close()
+
 if len(unread_email_ids) != 0:
 	for email in get_from(unread_email_ids):		
             with open("crs_ids.txt", "a") as f:
-                f.write("\n"+email)
-                print (email+" added successfully")
-
+                if not email in recipients:
+                    f.write(email+"\n")
+                    print(email+" added successfully."+"\n")
+                else:
+                    print(email+" already on mailing list!")
