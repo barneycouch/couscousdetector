@@ -35,10 +35,10 @@ print "Good morning sir, shall we have a check for couscous?\n\n";
 #sleep(2);
 
 
-print(`couscous.py "couscous"`);
+print(`food_search.py "couscous"`);
 
 
-my $couscousValue = `couscous.py "couscous"`;
+my $couscousValue = `food_search.py "couscous"`;
 
 `send_email.py $emailJ $passJ $recipient`
 

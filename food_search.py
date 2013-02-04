@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 try:
 	hatedfood = str(sys.argv[1])
 except:
-	print("Please provide the food you don't like:" "\n" """e.g. python couscous_mk2.py 'Cous Cous'""")
+	print("Please provide the food you don't like:" "\n" """e.g. python food_search.py 'Cous Cous'""")
 	quit()	
 
 hallsoup = BeautifulSoup(urllib.urlopen("http://caiusjcr.co.uk/hall").read())
