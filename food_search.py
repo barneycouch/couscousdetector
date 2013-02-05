@@ -1,33 +1,34 @@
 import urllib, re, sys
 from bs4 import BeautifulSoup
 
-try:
-	hatedfood = str(sys.argv[1]).title()  #.title() capitalises first letter, as used by the menu system
-except:
-	print("Please provide the food you don't like:" "\n" """e.g. python food_search.py 'Cous Cous'""")
-	quit()	
+def food_report(food):
 
-hallsoup = BeautifulSoup(urllib.urlopen("http://caiusjcr.co.uk/hall").read())
+	food = food.title() #Caius Menu Always Capitalised
+	
+	htmlmenu = BeautifulSoup(urllib.urlopen("http://caiusjcr.co.uk/hall").read())
+	hallsoup = htmlmenu.find_all('td', class_=re.compile('col*'))
 
-def find_menu(soup):
-	return soup.find_all('td', class_=re.compile('col*'))
-
-food_occurrences = {}
-
-for i in find_menu(hallsoup):
-	try:
-		if hatedfood in str(i):
-			occurence = str(i.find_all('h2')[0].find_all('a')[0].string)
+	occurrences = {}
+	for i in hallsoup:
+		if food in str(i):
+			occurrence = str(i.find_all('h2')[0].find_all('a')[0].string)
 			#thanks for the next line http://stackoverflow.com/questions/3199171/append-multiple-values-for-one-key-in-python-dictionary
 			try:
-				food_occurrences[hatedfood].append(occurence)
+				occurrences[food].append(occurrence)
 			except KeyError:
-				food_occurrences[hatedfood] = [occurence]
-	except:
-		print("")
+				occurrences[food] = [occurrence]
+	return occurrences		
 
 
-for k in food_occurrences:
-	print "%s is served on:" % k
-	for i in food_occurrences[k]:
-		print i
+try:
+	food_report = food_report(str(sys.argv[1]))
+	if not len(food_report) == 0:
+		for k in food_report:
+			print "%s is served on:" % k
+			for i in food_report[k]:
+				print i
+	else:
+		print "%s isn't being served in the near future!" % str(sys.argv[1])
+except:
+	print("Please provide the food you don't like:" "\n" """e.g. python food_search.py 'Cous Cous'""")
+	quit()
