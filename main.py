@@ -11,14 +11,7 @@ except:
     quit()
 
 file = open("crs_ids.txt")
-
-while 1:
-    line = file.readline()
-    if not line:
-        break
-    pass    
-    
-    os.system("send_email.py "+emailJ+" "+passwordJ)
+os.system("send_email.py "+emailJ+" "+passwordJ)
 
 #note that username and password arent used but are still read in for future needs
 
