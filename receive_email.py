@@ -33,6 +33,7 @@ else:
 # Search for all new mail
 status, unread_email_ids = imap_server.search(None, '(UNSEEN)')
 
+
 def get_from(email_ids):
     fromlist = []
     for e_id in email_ids:
