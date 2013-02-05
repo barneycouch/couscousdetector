@@ -11,4 +11,4 @@ Nobody likes couscous, so we built this to email us when it's tragically on the 
 
 `crs_ids.txt` forms our mailing list, holding those unlucky enough to be subscribed to our emails of doom.
 
-`main.py` calls the other scripts, with `crsid`, `crs password`, (both currently unused) `email`, `password` arguments.
+`main.py` calls the other scripts, with `crsid`, `crs password` (both currently unused), `email`, `password` arguments.
