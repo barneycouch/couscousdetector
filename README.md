@@ -11,4 +11,4 @@ Nobody likes couscous, so we built this to email us when it's tragically on the 
 
 `crs_ids.txt` forms our mailing list, holding those unlucky enough to be subscribed to our emails of doom.
 
-`Main.pl` 'CRSID (for logging into mealbooking)' 'Jeeves' email' 'Jeeves' password' 'associated raven password for CRSID' sends a standard email (content pending) to all users in the text file
+`main.py` calls the other scripts, with <crsid> <crs password> (both currently unused) <email> <password? arguments.
