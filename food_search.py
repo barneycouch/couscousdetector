@@ -22,7 +22,6 @@ def food_report(food):
 
 try:
 	food_report = food_report(str(sys.argv[1]))
-	print food_report
 	if not len(food_report) == 0:
 		for k in food_report:
 			print "%s is served on:" % k
