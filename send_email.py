@@ -4,8 +4,8 @@ SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587
 
 try:
-	sender = str(sys.argv[1])
-	password = str(sys.argv[2])
+	sender = "jthebutler@gmail.com"
+	password = "jeevesisguessable"
 except:
 	print("Please provide sender <email> <password> arguments!")
 	quit()
