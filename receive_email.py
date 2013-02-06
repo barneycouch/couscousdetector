@@ -54,7 +54,7 @@ if len(unread_email_ids) != 0:
 	for email in get_from(unread_email_ids):		
             with open("crs_ids.txt", "a") as f:
                 if not email in recipients:
-                    f.write(email+"\n")
+                    f.write("\n"+email)
                     print(email+" added successfully."+"\n")
                 else:
                     print(email+" already on mailing list!")

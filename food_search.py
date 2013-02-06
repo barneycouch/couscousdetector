@@ -21,15 +21,15 @@ def food_report(food):
 
 
 def pretty_food_report(food):
-	dates = "" #form the string that the message will consist of
+	pretty_message = "" #form the string that the message will consist of
 	occurrences = food_report(food)
 	if not len(occurrences) == 0:
 		for k in occurrences:
 			served = "%s is being served on:" % k
-			dates += (served + "\n")
+			pretty_message += (served + "\n")
 			for i in occurrences[k]:
-				dates += (i + "\n")
+				pretty_message += (i + "\n")
 	else:
 		notserved = "%s isn't being served in the near future!" % str(food)
-		dates += notserved
-	return dates
+		pretty_message += notserved
+	return pretty_message
