@@ -21,14 +21,17 @@ def food_report(food):
 
 
 def pretty_food_report(food):
+	dates = ""
 	occurrences = food_report(food)
 	if not len(occurrences) == 0:
 		for k in occurrences:
-			print "%s is being served on:" % k
+			served = "%s is being served on:" % k
+			dates += (served + "\n")
 			for i in occurrences[k]:
-				print i
+				dates += (i + "\n")
 	else:
 		print "%s isn't being served in the near future!" % str(food)
+	return dates
 
 # try:
 # 	food_report = food_report(str(sys.argv[1]))
