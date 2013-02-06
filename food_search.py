@@ -32,4 +32,4 @@ def pretty_food_report(food):
 	else:
 		notserved = "%s isn't being served in the near future!" % str(food)
 		pretty_message += notserved
-	return pretty_message
+	return pretty_message.replace("\n","<br />") + "<br />"

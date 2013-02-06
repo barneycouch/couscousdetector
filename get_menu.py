@@ -78,19 +78,19 @@ def formatted_menu_day(day):
 	menu = menu_day(day)
 
 	#Build output string
-	output = ""
+	output = "<br /><b><i>The Menu Today:</i></b><br /><br />"
 
 	if "starters" in menu:
-		output += "<b>Starters</b><br /><br />"
+		output += "<b>Starters</b><br />"
 		for item in menu['starters']:
 			output += item + "<br />"
 		output += "<br />"
 	
-	output += "<b>Mains</b><br /><br />"
+	output += "<b>Mains</b><br />"
 	for item in menu['mains']:
 		output += item + "<br />"
 
-	output += "<br /><b>Dessert</b><br /><br />"
+	output += "<br /><b>Dessert</b><br />"
 	for item in menu['dessert']:
 		output += item + "<br />"
 

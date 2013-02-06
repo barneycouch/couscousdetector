@@ -15,9 +15,7 @@ def send_email_to_list(body):
 
 	subject = 'The Food Roundup'
 
-	food_body = re.sub("\n", "<br>", body) #html email uses <br> for line breaks	
-
-	body = "Here's your food roundup!<br><br>" + food_body + "<br>-Jeeves"
+	body = "Here's your food roundup!<br><br>" + body + "<br>-Jeeves"
 
 	recipients = []
 
