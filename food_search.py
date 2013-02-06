@@ -21,7 +21,7 @@ def food_report(food):
 
 
 def pretty_food_report(food):
-	dates = ""
+	dates = "" #form the string that the message will consist of
 	occurrences = food_report(food)
 	if not len(occurrences) == 0:
 		for k in occurrences:
@@ -30,7 +30,8 @@ def pretty_food_report(food):
 			for i in occurrences[k]:
 				dates += (i + "\n")
 	else:
-		print "%s isn't being served in the near future!" % str(food)
+		notserved = "%s isn't being served in the near future!" % str(food)
+		dates += notserved
 	return dates
 
 # try:
