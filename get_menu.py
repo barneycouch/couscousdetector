@@ -66,6 +66,17 @@ def menu_day(day):
 		if not("Tag" in str(type(item))):
 			desserts.append(format_item_string(item))
 
+
+	#Get veggie option (if not saturday)
+	if not(day == 5):
+		veggieRow = html_menu.find_all('tr')[4]
+		veggieCell = veggieRow.find_all('td')[day]
+		veggieString = format_item_string(veggieCell.find_all('p')[2].get_text()) + "(V)"
+
+		#Shove it into the mains array
+		mains = [mains[0], veggieString] + mains[1:]
+
+
 	if day == 5:
 		return {"mains" : starters + mains, "dessert" : desserts} #Saturday formatiing
 	else:
