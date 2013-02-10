@@ -1,35 +1,74 @@
-import urllib, re, sys
+import urllib, re, sys, datetime
 from bs4 import BeautifulSoup
 
-def food_report(food):
+def food_search(food_list):
 
-	food = food.title() #Caius Menu Always Capitalised
-	
-	htmlmenu = BeautifulSoup(urllib.urlopen("http://caiusjcr.co.uk/hall").read())
-	hallsoup = htmlmenu.find_all('td', class_=re.compile('col*'))
+	html = urllib.urlopen("http://www.caiusmcr.com/uploads/current_menu.htm").read()
+	html_menu = BeautifulSoup(html)
+	dinnerRow = html_menu.find_all('tr')[3]
 
-	occurrences = {}
-	for i in hallsoup:
-		if food in str(i):
-			occurrence = str(i.find_all('h2')[0].find_all('a')[0].string)
-			#thanks for the next line http://stackoverflow.com/questions/3199171/append-multiple-values-for-one-key-in-python-dictionary
-			try:
-				occurrences[food].append(occurrence)
-			except KeyError:
-				occurrences[food] = [occurrence]
-	return occurrences		
+	report = {}
+
+	for food in food_list:
+		for day in range(0,7):
+			dinnerCell = dinnerRow.find_all('td')[day]
+			if food in dinnerCell.get_text().lower():
+				try:
+					report[food].append(day)
+				except KeyError:
+					report[food] = [day]
+
+	return report
+
+#Converts between day index and actual day
+def to_day_string(day_index):
+
+	day = datetime.datetime.today().weekday()
+	if day == day_index:
+		return "Today"
+
+	days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+	return days[day_index]
 
 
-def pretty_food_report(food):
-	pretty_message = "" #form the string that the message will consist of
-	occurrences = food_report(food)
-	if not len(occurrences) == 0:
-		for k in occurrences:
-			served = "%s is being served on:" % k
-			pretty_message += (served + "\n")
-			for i in occurrences[k]:
-				pretty_message += (i + "\n")
-	else:
-		notserved = "%s isn't being served in the near future!" % str(food)
-		pretty_message += notserved
-	return pretty_message.replace("\n","<br />") + "<br />"
+#Builds a report from the input report_dict (from above) and the food the user is interested in
+def food_report(food_search_dict, food_list):
+
+	day = datetime.datetime.today().weekday()
+
+	report = "<i><b><h3>Your Food:</h3></b></i>"
+
+	for food_item in food_list:
+		try:
+			occurances = food_search_dict[food_item]
+		except KeyError:
+			report += "%s isn't being served in the near future.<br />" % food_item.title()
+			continue
+
+		#Cull all occurrances which have already happened (or are more than 3 days away)
+		futureOccurances = []
+		for occurance in occurances:
+			if occurance >= day and occurance - 3 < day:
+				futureOccurances.append(occurance)
+
+		occurances = futureOccurances
+
+		if len(occurances) == 0:
+			report += "%s isn't being served in the near future.<br />" % food_item.title()
+
+		else:
+			report += "%s is being served " % food_item.title()
+
+			#If not being served today, need an on ('on' Monday etc)
+			if not(day in occurances):
+				report += "on "
+
+			for occurance in occurances:
+				report += " %s," % to_day_string(occurance)
+
+			#Remove last comma, add a full stop and a line break
+			report = report[:-1] + "."
+			report += "<br />"
+
+	return report
+
