@@ -37,6 +37,7 @@ unread_email_ids = unread_email_ids[0].split(' ')
 
 def get_new_users(email_ids):
     new_users = {}
+    unsubscribe_users = []
     for e_id in email_ids:
 
         #Get sender
@@ -50,6 +51,11 @@ def get_new_users(email_ids):
         subject_text = response[0][1][9:]
         food_items = subject_text.split(",")
 
+        #Check to see if the user wants to unsubscribe
+        _, response = imap_server.fetch(e_id, '(UID BODY[TEXT])')
+        if 'un' in response[0][1].lower():
+            unsubscribe_users.append(sender)
+
         #Ensure all whitespace is trimmed from food items
         food_itemsT = []
         for item in food_items:
@@ -58,7 +64,7 @@ def get_new_users(email_ids):
 
         new_users[sender] = food_items
 
-    return new_users
+    return new_users, unsubscribe_users
 
 #load in all the food we currently scrape for
 food_txt = open("food.txt", "r")
@@ -76,7 +82,7 @@ for line in f:
 f.close()
 
 #Set new keys corresponding to new users
-new_user_details = get_new_users(unread_email_ids)
+new_user_details, unsubscribe_users = get_new_users(unread_email_ids)
 for user in new_user_details:
     recipients[user] = new_user_details[user]
 
@@ -84,6 +90,10 @@ for user in new_user_details:
     for food_item in new_user_details[user]:
         if not(food_item in all_food) and not(food_item in new_food):
             new_food.append(food_item)
+
+#Unsubscribe users
+for u in unsubscribe_users:
+    recipients.pop(u)
 
 #Write back out
 f = open("crs_ids.txt", "w")
