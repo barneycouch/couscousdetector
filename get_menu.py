@@ -89,7 +89,7 @@ def formatted_menu_day(day):
 	menu = menu_day(day)
 
 	#Build output string
-	output = "<br /><b><i><h3>The Menu Today:</h3></i></b>"
+	output = "<b><i><h3>The Menu Today:</h3></i></b>"
 
 	if "starters" in menu:
 		output += "<b>Starters</b><br />"

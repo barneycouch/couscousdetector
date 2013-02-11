@@ -40,15 +40,14 @@ def send_roundups():
 	session = open_session()
 
 	for r in recipients:
-		cam_email_full = r + "@cam.ac.uk"
 		user_food_report = food_report(food_search_dict, recipients[r])
 
-		headers = ["From: " + sender, "Subject: " + subject, "To: " + cam_email_full, "MIME-Version: 1.0","Content-Type: text/html"]
+		headers = ["From: " + sender, "Subject: " + subject, "To: " + r, "MIME-Version: 1.0","Content-Type: text/html"]
 
 		body = "Here's your food roundup!<br>" + user_food_report + menu + "<br /><i>- Jeeves</i>"
 
 		headers = "\r\n".join(headers)
-		session.sendmail(sender, cam_email_full, headers + "\r\n\r\n" + body)
+		session.sendmail(sender, r, headers + "\r\n\r\n" + body)
 
 	session.quit()
 
@@ -57,8 +56,12 @@ def open_session():
 	SMTP_SERVER = 'smtp.gmail.com'
 	SMTP_PORT = 587
 
-	sender = "jthebutler@gmail.com"
-	password = "########"
+	try:
+    	sender = str(sys.argv[1])
+    	password = str(sys.argv[2])
+	except:
+    	print("Please provide <gmail username> <password> arguments!")
+    quit()
 
 	session = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
 	 

@@ -34,6 +34,9 @@ def to_day_string(day_index):
 #Builds a report from the input report_dict (from above) and the food the user is interested in
 def food_report(food_search_dict, food_list):
 
+	if food_list[0] == '':
+		return ''
+
 	day = datetime.datetime.today().weekday()
 
 	report = "<i><b><h3>Your Food:</h3></b></i>"
@@ -42,7 +45,7 @@ def food_report(food_search_dict, food_list):
 		try:
 			occurances = food_search_dict[food_item]
 		except KeyError:
-			report += "%s isn't being served in the near future.<br />" % food_item.title()
+			report += "%s isn't being served in the near future.<br /><br />" % food_item.title()
 			continue
 
 		#Cull all occurrances which have already happened (or are more than 3 days away)
@@ -54,7 +57,7 @@ def food_report(food_search_dict, food_list):
 		occurances = futureOccurances
 
 		if len(occurances) == 0:
-			report += "%s isn't being served in the near future.<br />" % food_item.title()
+			report += "%s isn't being served in the near future.<br /><br />" % food_item.title()
 
 		else:
 			report += "%s is being served " % food_item.title()
@@ -68,7 +71,7 @@ def food_report(food_search_dict, food_list):
 
 			#Remove last comma, add a full stop and a line break
 			report = report[:-1] + "."
-			report += "<br />"
+			report += "<br /><br />"
 
 	return report
 
