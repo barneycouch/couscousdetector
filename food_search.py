@@ -2,7 +2,6 @@ import urllib, re, sys, datetime
 from bs4 import BeautifulSoup
 
 def food_search(food_list):
-
 	html = urllib.urlopen("http://www.caiusmcr.com/uploads/current_menu.htm").read()
 	html_menu = BeautifulSoup(html)
 	dinnerRow = html_menu.find_all('tr')[3]
@@ -19,6 +18,7 @@ def food_search(food_list):
 					report[food] = [day]
 
 	return report
+
 
 #Converts between day index and actual day
 def to_day_string(day_index):
@@ -76,4 +76,3 @@ def food_report(food_search_dict, food_list):
 	report += "<br />"
 
 	return report
-

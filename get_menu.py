@@ -1,14 +1,14 @@
 import urllib, datetime, re
 from bs4 import BeautifulSoup
 
+
+## @JackMorris what do these 2 functions do? Cheers, bc
 def format_item_string(item):
 	return item.replace("\n", "").replace("  ", " ").replace("\r", "").replace(u'\u2019', u'\'').strip()
 
 def check_item_string(item):
 	return not("Tag" in str(type(item)) or item == "or" or item == " " or item == "" or "(" in item or ")" in item or "contain" in item)
 
-def menu_today():
-	return menu_day(datetime.datetime.today().weekday())
 
 def menu_day(day):
 
@@ -79,8 +79,9 @@ def menu_day(day):
 	else:
 		return {"starters" : starters, "mains" : mains, "dessert" : desserts}
 
-def formatted_menu_today():
-	return formatted_menu_day(datetime.datetime.today().weekday())
+
+def menu_today():
+	return menu_day(datetime.datetime.today().weekday())		
 
 def formatted_menu_day(day):
 	menu = menu_day(day)
@@ -104,3 +105,5 @@ def formatted_menu_day(day):
 
 	return output
 
+def formatted_menu_today():
+	return formatted_menu_day(datetime.datetime.today().weekday())
