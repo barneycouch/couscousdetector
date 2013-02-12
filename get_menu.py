@@ -2,7 +2,10 @@ import urllib, datetime, re
 from bs4 import BeautifulSoup
 
 def format_item_string(item):
-	return item.replace("\n", "").replace("  ", " ").replace("\r", "").replace(u'\u2019', u'\'').encode('ascii', 'ignore')
+	return item.replace("\n", "").replace("  ", " ").replace("\r", "").replace(u'\u2019', u'\'').strip()
+
+def check_item_string(item):
+	return not("Tag" in str(type(item)) or item == "or" or item == " " or item == "" or "(" in item or ")" in item or "contain" in item)
 
 def menu_today():
 	return menu_day(datetime.datetime.today().weekday())
@@ -22,11 +25,11 @@ def menu_day(day):
 	### Get actual cell for today and build list of dinner items
 	dinnerCell = dinnerRow.find_all('td')[day]
 
-	dinnerItemTags = dinnerCell.find_all('span')
+	dinnerItemTags = dinnerCell.find_all('p')
 	dinnerItems = []
 
 	for itemTag in dinnerItemTags:
-		dinnerItems.append(itemTag.contents[0])
+		dinnerItems.append(itemTag.get_text())
 
 
 	### Create arrays ready for courses, and create bools to track where we're at
@@ -35,35 +38,29 @@ def menu_day(day):
 	desserts = []
 
 	starters_found = False
-	first_starter_found = False # Needed as 'veg cous cous' is stupidly spaced over two spans
 	mains_found = False
-
 
 	### This is where it gets funky
 	for item in dinnerItems:
 
+		item = item.encode('ascii', 'ignore')
+	
 		if not(starters_found):
 			if "*" in item:
 				starters_found = True
-			elif item == "or":
-				first_starter_found = True
-				starters.append("")
-			elif not("Tag" in str(type(item))):
-				if first_starter_found:
-					starters[2] = starters[2] + format_item_string(item)
-				else:
-					starters.append(format_item_string(item))
+			elif check_item_string(item):
+				starters.append(format_item_string(item))
 			continue
 
 
 		if not(mains_found):
 			if "*" in item:
 				mains_found = True
-			elif not("Tag" in str(type(item)) or " or " in item or item == " "):
+			elif check_item_string(item):
 				mains.append(format_item_string(item))
 			continue
 
-		if not("Tag" in str(type(item))):
+		if check_item_string(item):
 			desserts.append(format_item_string(item))
 
 
@@ -74,7 +71,7 @@ def menu_day(day):
 		veggieString = format_item_string(veggieCell.find_all('p')[2].get_text()) + "(V)"
 
 		#Shove it into the mains array
-		mains = [mains[0], veggieString] + mains[1:]
+		mains = mains + [veggieString]
 
 
 	if day == 5:
@@ -106,3 +103,4 @@ def formatted_menu_day(day):
 		output += item + "<br />"
 
 	return output
+

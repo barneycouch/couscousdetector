@@ -11,6 +11,6 @@ Nobody likes couscous, so we built this to email us when it's tragically on the 
 
 `receive_email.py` and `send_email.py` check our inbox for new subscribers and send out the email alerts to our mailing list, respectively.
 
-`crs_ids.txt` forms our mailing list, holding those unlucky enough to be subscribed to our emails of doom. Also includes their notified foods, with format (per line) "CSRid,food1,food2,ect"
+`users.txt` forms our mailing list, holding those unlucky enough to be subscribed to our emails of doom. Also includes their notified foods, with format (per line) "user-email,food1,food2,ect"
 
 `food.txt` includes all the foods we scrape for, to avoid more scraping than needed.

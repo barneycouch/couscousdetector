@@ -67,19 +67,27 @@ def get_new_users(email_ids):
     return new_users, unsubscribe_users
 
 #load in all the food we currently scrape for
-food_txt = open("food.txt", "r")
-all_food = food_txt.read()
-food_txt.close()
 new_food = []
+all_food = ""
+try:
+    food_txt = open("food.txt", "r")
+    all_food = food_txt.read()
+    food_txt.close()
+except:
+    print("Food file not found, creating new.")
+
 
 #Completely load in all recipients
 recipients = {}
-f = open("crs_ids.txt", "r")
-for line in f:
-    recipient_details = line.split(",")
-    user = recipient_details.pop(0)
-    recipients[user] = recipient_details
-f.close()
+try:
+    f = open("users.txt", "r")
+    for line in f:
+        recipient_details = line.split(",")
+        user = recipient_details.pop(0)
+        recipients[user] = recipient_details
+    f.close()
+except:
+    print("Users file not found, creating new.")
 
 #Set new keys corresponding to new users
 new_user_details, unsubscribe_users = get_new_users(unread_email_ids)
@@ -96,7 +104,7 @@ for u in unsubscribe_users:
     recipients.pop(u)
 
 #Write back out
-f = open("crs_ids.txt", "w")
+f = open("users.txt", "w")
 file_string = ""
 for user in recipients:
     file_string += user+","

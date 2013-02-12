@@ -10,17 +10,24 @@ def send_roundups():
 
 	#Build food search
 	food = []
-	f = open("food.txt", "r")
-	for line in f:
-		food.append(line.rstrip())
+	try:
+		f = open("food.txt", "r")
+		for line in f:
+			food.append(line.rstrip())
+	except:
+		print("No food found.")
 
 	food_search_dict = food_search(food)
 
 	#Get recipients
 	recipient_strings = []
-	f = open("crs_ids.txt", "r")
-	for line in f:
-		recipient_strings.append(line.rstrip())
+	try:
+		f = open("users.txt", "r")
+		for line in f:
+			recipient_strings.append(line.rstrip())
+	except:
+		print("No users found, qutting.")
+		quit()
 
 	recipients = {}
 	for r in recipient_strings:
