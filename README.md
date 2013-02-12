@@ -5,6 +5,7 @@ Nobody likes couscous, so we built this to email us when it's tragically on the 
 
 ##For the Public
 Send an email to `jthebutler@gmail.com` with the foods you don't like in the subject field, separated by commas.
+
 e.g. `Cous Cous, Salad, Pie`
 
 ##For the Devs
