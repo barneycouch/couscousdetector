@@ -55,6 +55,7 @@ def send_roundups():
 
 		headers = "\r\n".join(headers)
 		session.sendmail(sender, r, headers + "\r\n\r\n" + body)
+		print("Sending roundup to " + r)
 
 	session.quit()
 
