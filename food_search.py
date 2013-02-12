@@ -9,6 +9,7 @@ def food_search(food_list):
 	report = {}
 
 	for food in food_list:
+		food = food.lower() #bug with uppercase
 		for day in range(0,7):
 			dinnerCell = dinnerRow.find_all('td')[day]
 			if food in dinnerCell.get_text().lower():
@@ -18,8 +19,6 @@ def food_search(food_list):
 					report[food] = [day]
 
 	return report
-
-print food_search(["Salad"])
 
 #Converts between day index and actual day
 def to_day_string(day_index):
@@ -77,3 +76,4 @@ def food_report(food_search_dict, food_list):
 	report += "<br />"
 
 	return report
+
