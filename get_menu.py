@@ -2,10 +2,11 @@ import urllib, datetime, re
 from bs4 import BeautifulSoup
 
 
-## @JackMorris what do these 2 functions do? Cheers, bc
+#clean up html, make sure no newlines etc
 def format_item_string(item):
 	return item.replace("\n", "").replace("  ", " ").replace("\r", "").replace(u'\u2019', u'\'').strip()
 
+#don't consider html tags or separators as food
 def check_item_string(item):
 	return not("Tag" in str(type(item)) or item == "or" or item == " " or item == "" or "(" in item or ")" in item or "contain" in item)
 

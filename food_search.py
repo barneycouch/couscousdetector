@@ -19,6 +19,7 @@ def food_search(food_list):
 
 	return report
 
+print food_search(["Salad"])
 
 #Converts between day index and actual day
 def to_day_string(day_index):
