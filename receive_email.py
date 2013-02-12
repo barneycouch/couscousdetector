@@ -59,7 +59,7 @@ def get_new_users(email_ids):
         #Ensure all whitespace is trimmed from food items
         food_itemsT = []
         for item in food_items:
-            food_itemsT.append(item.strip())
+            food_itemsT.append(item.strip().lower())
         food_items = food_itemsT
 
         new_users[sender] = food_items
