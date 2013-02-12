@@ -1,16 +1,16 @@
 #Jeeves, the infamous Couscous detector.
 
 ##Introduction
-Nobody likes couscous, so we built this to email us when it's tragically on the menu. By popular demand it's expanded to tell you when other horrible dishes are avilable, and there's more hall amelioration measures in the pipeline.
+Nobody likes couscous, so we built this to email us when it's tragically on the menu. By popular demand it's expanded to tell you when other horrible dishes are avilable, and what the daily menu is.
 
-##Usage
+##For the Public
+Send an email to `jthebutler@gmail.com` with the foods you don't like in the subject field, separated by commas.
+e.g. `Cous Cous, Salad, Pie`
 
-`food_search.py` scrapes the hall menu for specified foods and returns a food report. 'food_search()' does the actual menu scrpaing, whilst 'food_report()' prepares per-user reports.
+##For the Devs
 
-`get_menu.py` fetches the daily menu, also includes functions to fetch the menu on a specific day (Monday:0, Sunday:6) and to return the unformatted menu.
+`send_email.py` sends out the emails to all our subscribed users, calling on `food_search.py` and `get_menu.py` to find that food and retrieve the daily menu.
 
-`receive_email.py` and `send_email.py` check our inbox for new subscribers and send out the email alerts to our mailing list, respectively.
+`receive_email.py` monitors our inbox for new subscribers and their preferences.
 
-`users.txt` forms our mailing list, holding those unlucky enough to be subscribed to our emails of doom. Also includes their notified foods, with format (per line) "user-email,food1,food2,ect"
-
-`food.txt` includes all the foods we scrape for, to avoid more scraping than needed.
+User preferences and total food tracked are stored in `users.txt` (in the form `user-email,food1,food2`) and `food.txt` (one food per line), both in the `.gitignore` file so not appearing here. If you can't run this script create these first.

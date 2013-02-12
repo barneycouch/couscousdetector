@@ -1,3 +1,4 @@
+#fetches the daily menu, also includes functions to fetch the menu on a specific day (Monday:0, Sunday:6) and to return the unformatted menu.
 import urllib, datetime, re
 from bs4 import BeautifulSoup
 
