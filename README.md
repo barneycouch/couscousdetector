@@ -14,4 +14,6 @@ e.g. `Cous Cous, Salad, Pie`
 
 `receive_email.py` monitors our inbox for new subscribers and their preferences.
 
+`check_bookings.py` will alert a user if they haven't booked in for hall on a particular day.
+
 User preferences and total food tracked are stored in `users.txt` (in the form `user-email,food1,food2`) and `food.txt` (one food per line), both in the `.gitignore` file so not appearing here. If you can't run this script create these first.
