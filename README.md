@@ -1,7 +1,7 @@
 #Jeeves, the infamous Couscous detector.
 
 ##Introduction
-Nobody likes couscous, so we built this to email us when it's tragically on the menu. By popular demand it's expanded to tell you when other horrible dishes are avilable, what the daily menu is, and if you've booked for hall.
+Nobody likes couscous, so we built this to email us when it's tragically on the menu. By popular demand it's expanded to tell you when other horrible dishes are avilable, what the daily menu is, if you've booked for hall.
 
 ##For the Public
 Send an email to `jthebutler@gmail.com` with the foods you don't like in the subject field, separated by commas.
