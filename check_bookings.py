@@ -3,7 +3,7 @@
 import mechanize, cookielib, datetime, sys
 from bs4 import BeautifulSoup
 
-def check_todays_booking(crsid, password):
+def check_bookings(crsid, password):
 
 	#initialise browser, set options
 	br = mechanize.Browser()
@@ -58,4 +58,4 @@ if len(sys.argv) != 3:
 	print('Please provide <crsid> <password> arguments!')
 	quit()
 
-print check_todays_booking(sys.argv[1], sys.argv[2])	
+print check_bookings(sys.argv[1], sys.argv[2])	
