@@ -10,7 +10,7 @@ def check_todays_booking(crsid, password):
 	cj = cookielib.LWPCookieJar()
 	br.set_cookiejar(cj)
 	br.set_handle_equiv(True)
-#	br.set_handle_gzip(True) 		in tutorial, but throws an 'experimental' error
+	#br.set_handle_gzip(True) 		in tutorial, but throws an 'experimental' error
 	br.set_handle_redirect(True)
 	br.set_handle_referer(True)
 	br.set_handle_robots(False)
