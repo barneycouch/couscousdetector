@@ -3,7 +3,7 @@
 import mechanize, cookielib, datetime, sys
 from bs4 import BeautifulSoup
 
-from send_email_2 import send_email
+from send_email import send_email
 
 def check_bookings(crsid, password):
 

@@ -10,7 +10,7 @@ e.g. `Cous Cous, Salad, Pie`
 
 ##For the Devs
 
-`send_email.py` sends out the emails to all our subscribed users, calling on `food_search.py` and `get_menu.py` to find that food and retrieve the daily menu.
+`send_roundups.py` sends out the emails to all our subscribed users, calling on `food_search.py` and `get_menu.py` to find that food and retrieve the daily menu.
 
 `receive_email.py` monitors our inbox for new subscribers and their preferences.
 
