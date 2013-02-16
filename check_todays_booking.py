@@ -43,12 +43,12 @@ def check_todays_booking(crsid, password):
 	#make an alert message - a bit ugly but it works
 	msgout = ""
 	if today in bookings.keys():
-		msgout += "You're booked in for today." + '\n'
+		msgout += "You're booked in for " + bookings[today] + " today." + '\n'
 	else:
 		msgout += "Book in for today urgently!" +'\n'
 
 	if tomorrow in bookings.keys():
-		msgout += "You're booked in for tomorrow."
+		msgout += "You're booked in for " + bookings[tomorrow] + " tomorrow."
 	else:
 		msgout += "Book in for tomorrow!"
 	return msgout
