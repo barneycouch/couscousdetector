@@ -1,6 +1,6 @@
 #hat tip to http://stockrt.github.com/p/handling-html-forms-with-python-mechanize-and-BeautifulSoup/
 
-import mechanize, cookielib, datetime, sys
+import mechanize, cookielib, datetime, sys, re
 from bs4 import BeautifulSoup
 
 from send_email import send_email
@@ -35,12 +35,15 @@ def check_bookings(crsid, password):
 	for i in bookingrow:
 		if "View/Edit" in str(i):
 			date = str(i.find_all('td')[0].string)
+			date = re.sub("  ", " ", date) #remove double space from date string
 			bookingtype = str(i.find_all('td')[1].string)
 			bookings[date] = bookingtype
 
 	#go fetch the current dates (today and tomorrow for now)
-	today = datetime.date.today().strftime("%A %d %B %Y")
-	tomorrow = (datetime.date.today() + datetime.timedelta(days=1)).strftime("%A %d %B %Y")
+	#hat tip to http://stackoverflow.com/questions/904928/python-strftime-date-without-leading-0 for stripping 
+	today = datetime.date.today().strftime("%A %-d %B %Y")
+	tomorrow = (datetime.date.today() + datetime.timedelta(days=1)).strftime("%A %-d %B %Y")
+
 
 	#make an alert message - a bit ugly but it works
 	msgout = ""
